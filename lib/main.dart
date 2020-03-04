@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 //import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'CountryPage.dart';
@@ -112,21 +113,21 @@ class _State extends State<My_App> {
                     )),
                 Container(
                     child: Row(
-                      children: <Widget>[
-                        Text('Does not have account?'),
-                        FlatButton(
-                          textColor: Colors.blue,
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            //signup screen
-                          },
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))
+                  children: <Widget>[
+                    Text('Does not have account?'),
+                    FlatButton(
+                      textColor: Colors.blue,
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        //signup screen
+                      },
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ))
               ],
             )));
   }
@@ -212,14 +213,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 case 1:
                   return new Center(
-                    child: new SingleChildScrollView(
-                      child: new ConstrainedBox(
-                          constraints: new BoxConstraints(),
-                      child: Column(children: <Widget>[
-                        Center(
+                      child: new SingleChildScrollView(
+                          child: new ConstrainedBox(
+                              constraints: new BoxConstraints(),
+                              child: Column(children: <Widget>[
+                                Center(
 //                    child: new Text('Second screen'),
-                            child: Center(
-                                child: Column(children: <Widget>[
+                                    child: Center(
+                                        child: Column(children: <Widget>[
                                   Center(
                                     child: RaisedButton(
                                       child: Text('Go to Second Screen'),
@@ -227,7 +228,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => MySecondPage()),
+                                              builder: (context) =>
+                                                  MySecondPage()),
                                         );
                                       },
                                       textColor: Colors.white,
@@ -260,8 +262,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Text('More Rounded Corners'),
                                     color: Colors.purpleAccent,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(16.0))),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(16.0))),
                                     onPressed: () {},
                                   ),
                                   RaisedButton(
@@ -301,10 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                   ),
                                 ])))
-                      ])
-                      )
-                    )
-                  );
+                              ]))));
                 case 2:
 //                  return new Center(
                   return new Scaffold(
@@ -326,70 +325,71 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             elevation: 5,
                             margin:
-                            EdgeInsets.only(left: 10, right: 10, top: 10),
+                                EdgeInsets.only(left: 10, right: 10, top: 10),
                             child: Container(
                                 child: Column(children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Column(
 //                                    mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.fromLTRB(12.0, 12.0, 0, 6.0),
-                                            child: Text(
-                                              data[index]["title"],
-                                              maxLines: 2,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            12.0, 12.0, 0, 6.0),
+                                        child: Text(
+                                          data[index]["title"],
+                                          maxLines: 2,
 //                                          sendersList[position],
-                                              style: TextStyle(
-                                                  fontSize: 15.0, fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.fromLTRB(12.0, 12.0, 0, 6.0),
-                                            child: Text(
-                                              data[index]["body"],
-//                                          subjectList[position],
-                                              style: TextStyle(fontSize: 11.0),
-                                              maxLines: 5,
-                                            ),
-                                          ),
-                                        ],
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-//                                      mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Text(
-                                              "5m",
-                                              style: TextStyle(color: Colors.grey),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Icon(
-                                                Icons.star_border,
-                                                size: 35.0,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ],
+                                        padding: const EdgeInsets.fromLTRB(
+                                            12.0, 12.0, 0, 6.0),
+                                        child: Text(
+                                          data[index]["body"],
+//                                          subjectList[position],
+                                          style: TextStyle(fontSize: 11.0),
+                                          maxLines: 5,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Divider(
-                                    height: 2.0,
-                                    color: Colors.grey,
-                                  )
-                                ])));
-
-
-
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+//                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text(
+                                          "5m",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Icon(
+                                            Icons.star_border,
+                                            size: 35.0,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                height: 2.0,
+                                color: Colors.grey,
+                              )
+                            ])));
 
 //                            semanticContainer: true,
 //                            clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -510,9 +510,9 @@ class _MySecondPageState extends State<MySecondPage> {
           title: Text('Second Screen'),
         ),
         body: Center(
-        child: new SingleChildScrollView(
-        child: new ConstrainedBox(
-        constraints: new BoxConstraints(),
+            child: new SingleChildScrollView(
+                child: new ConstrainedBox(
+          constraints: new BoxConstraints(),
           child: Column(children: <Widget>[
             Center(
               child: RaisedButton(
@@ -539,15 +539,15 @@ class _MySecondPageState extends State<MySecondPage> {
             ),
             Center(
                 child: Icon(
-                  Icons.directions_transit,
-                  color: Colors.red,
-                )),
+              Icons.directions_transit,
+              color: Colors.red,
+            )),
             Center(
                 child: Icon(
-                  Icons.directions_transit,
-                  color: Colors.green,
-                  size: 70,
-                )),
+              Icons.directions_transit,
+              color: Colors.green,
+              size: 70,
+            )),
             Text('Trains',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -557,9 +557,9 @@ class _MySecondPageState extends State<MySecondPage> {
                 )),
             Center(
                 child: Text(
-                  'Students',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )),
+              'Students',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )),
             DataTable(
               columns: [
                 DataColumn(label: Text('RollNo')),
@@ -606,9 +606,7 @@ class _MySecondPageState extends State<MySecondPage> {
                   },
                 )),
           ]),
-        )
-    ))
-    );
+        ))));
   }
 }
 
@@ -637,129 +635,138 @@ class _MyThirdPageState extends State<MyThirdPage> {
         body: Center(
           child: new SingleChildScrollView(
               child: new ConstrainedBox(
-                constraints: new BoxConstraints(),
-                child: Column(children: <Widget>[
-                  Center(
-                    child: RaisedButton(
-                      child: Text('Go back to Second Screen'),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+            constraints: new BoxConstraints(),
+            child: Column(children: <Widget>[
+              Center(
+                child: RaisedButton(
+                  child: Text('Go back to Second Screen'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              MaterialButton(
+                child: Text(
+                  'Show details',
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
+                onPressed: () => setState(() {
+                  opacityLevel = 1.0;
+                }),
+              ),
+              AnimatedOpacity(
+                duration: Duration(seconds: 3),
+                opacity: opacityLevel,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Name: Bhanu Prakash Dave',
+                      style: TextStyle(fontSize: 18),
                     ),
-                  ),
-                  MaterialButton(
-                    child: Text(
-                      'Show details',
-                      style: TextStyle(color: Colors.blueAccent),
+                    Text(
+                      'Age: 35',
+                      style: TextStyle(fontSize: 18),
                     ),
-                    onPressed: () => setState(() {
-                      opacityLevel = 1.0;
-                    }),
-                  ),
-                  AnimatedOpacity(
-                    duration: Duration(seconds: 3),
-                    opacity: opacityLevel,
-                    child: Column(
-                      children: <Widget>[
-                        Text('Name: Bhanu Prakash Dave', style: TextStyle(fontSize: 18),),
-                        Text('Age: 35', style: TextStyle(fontSize: 18),),
-                        Text('Occupation: Android Developer', style: TextStyle(fontSize: 18),),
-                      ],
+                    Text(
+                      'Occupation: Android Developer',
+                      style: TextStyle(fontSize: 18),
                     ),
-                  ),
-                  Image.network('https://urlzs.com/RsqCz'),
-                  /*Download Image From URL*/
-                  Container(
-                      margin: EdgeInsets.all(20),
-                      child: Text(
-                        'Hello! Welcome to TutorialKart. We shall zoom this text when you long press on it.',
-                        style: TextStyle(fontSize: _fontSize),
-                        textAlign: TextAlign.center,
-                      )),
-                  RaisedButton(
-                    onPressed: () => {increaseFontSize()},
-                    child: Text('Bigger Font'),
-                  ),
-                  Switch(
-                    value: isSwitched,
-                    onChanged: (value) {
+                  ],
+                ),
+              ),
+              Image.network('https://urlzs.com/RsqCz'),
+              /*Download Image From URL*/
+              Container(
+                  margin: EdgeInsets.all(20),
+                  child: Text(
+                    'Hello! Welcome to TutorialKart. We shall zoom this text when you long press on it.',
+                    style: TextStyle(fontSize: _fontSize),
+                    textAlign: TextAlign.center,
+                  )),
+              RaisedButton(
+                onPressed: () => {increaseFontSize()},
+                child: Text('Bigger Font'),
+              ),
+              Switch(
+                value: isSwitched,
+                onChanged: (value) {
+                  setState(() {
+                    isSwitched = value;
+                    print(isSwitched);
+                  });
+                },
+                activeTrackColor: Colors.lightGreenAccent,
+                activeColor: Colors.green,
+              ),
+              Container(
+                  margin: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Full Name',
+                    ),
+                    onChanged: (text) {
                       setState(() {
-                        isSwitched = value;
-                        print(isSwitched);
+                        fullName = text;
+                        //you can access nameController in its scope to get
+                        // the value of text entered as shown below
+                        //fullName = nameController.text;
                       });
                     },
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: Colors.green,
-                  ),
-                  Container(
-                      margin: EdgeInsets.all(20),
-                      child: TextField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Full Name',
-                        ),
-                        onChanged: (text) {
-                          setState(() {
-                            fullName = text;
-                            //you can access nameController in its scope to get
-                            // the value of text entered as shown below
-                            //fullName = nameController.text;
-                          });
-                        },
-                      )),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: Text(fullName),
-                  ),
-                  Container(
-                    margin:
+                  )),
+              Container(
+                margin: EdgeInsets.all(20),
+                child: Text(fullName),
+              ),
+              Container(
+                margin:
                     EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 10),
-                    child: Table(
-                      border: TableBorder.all(),
-                      children: [
-                        TableRow(children: [
-                          Column(children: [
-                            Icon(
-                              Icons.account_box,
-                              size: iconSize,
-                            ),
-                            Text('My Account')
-                          ]),
-                          Column(children: [
-                            Icon(
-                              Icons.settings,
-                              size: iconSize,
-                            ),
-                            Text('Settings')
-                          ]),
-                          Column(children: [
-                            Icon(
-                              Icons.lightbulb_outline,
-                              size: iconSize,
-                            ),
-                            Text('Ideas')
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Icon(
-                            Icons.cake,
-                            size: iconSize,
-                          ),
-                          Icon(
-                            Icons.voice_chat,
-                            size: iconSize,
-                          ),
-                          Icon(
-                            Icons.add_location,
-                            size: iconSize,
-                          ),
-                        ]),
-                      ],
-                    ),
-                  ),
-                ]),
-              )),
+                child: Table(
+                  border: TableBorder.all(),
+                  children: [
+                    TableRow(children: [
+                      Column(children: [
+                        Icon(
+                          Icons.account_box,
+                          size: iconSize,
+                        ),
+                        Text('My Account')
+                      ]),
+                      Column(children: [
+                        Icon(
+                          Icons.settings,
+                          size: iconSize,
+                        ),
+                        Text('Settings')
+                      ]),
+                      Column(children: [
+                        Icon(
+                          Icons.lightbulb_outline,
+                          size: iconSize,
+                        ),
+                        Text('Ideas')
+                      ]),
+                    ]),
+                    TableRow(children: [
+                      Icon(
+                        Icons.cake,
+                        size: iconSize,
+                      ),
+                      Icon(
+                        Icons.voice_chat,
+                        size: iconSize,
+                      ),
+                      Icon(
+                        Icons.add_location,
+                        size: iconSize,
+                      ),
+                    ]),
+                  ],
+                ),
+              ),
+            ]),
+          )),
         ));
   }
 }
@@ -775,7 +782,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-            () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+        () => Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (BuildContext context) => MyHomePage())));
   }
 
@@ -787,7 +794,11 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Text(
           'Sample App',
           style: TextStyle(
-            fontSize: 25, fontStyle: FontStyle.italic, color: Colors.amber, fontWeight: FontWeight.bold,),
+            fontSize: 25,
+            fontStyle: FontStyle.italic,
+            color: Colors.amber,
+            fontWeight: FontWeight.bold,
+          ),
         ),
 //        child: Image.asset('asse/**/ts/splash.png'),
       ),
@@ -813,20 +824,19 @@ class ProductBox extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Image.asset("assets/appimages/" + image),
-                  Expanded(
-                      child: Container(
-                          padding: EdgeInsets.all(5),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Text(this.name,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              Text(this.description),
-                              Text("Price: " + this.price.toString()),
-                            ],
-                          )))
-                ])));
+              Image.asset("assets/appimages/" + image),
+              Expanded(
+                  child: Container(
+                      padding: EdgeInsets.all(5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(this.name,
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(this.description),
+                          Text("Price: " + this.price.toString()),
+                        ],
+                      )))
+            ])));
   }
 }
