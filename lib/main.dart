@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
     );
   }
-
 //  _MyAppState createState() => _MyAppState();
 }
 
