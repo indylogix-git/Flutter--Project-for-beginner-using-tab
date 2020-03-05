@@ -730,6 +730,7 @@ class _MyThirdPageState extends State<MyThirdPage> {
                         Icon(
                           Icons.account_box,
                           size: iconSize,
+                          color: Colors.deepPurple,
                         ),
                         Text('My Account')
                       ]),
@@ -737,6 +738,7 @@ class _MyThirdPageState extends State<MyThirdPage> {
                         Icon(
                           Icons.settings,
                           size: iconSize,
+                          color: Colors.purple,
                         ),
                         Text('Settings')
                       ]),
@@ -744,6 +746,7 @@ class _MyThirdPageState extends State<MyThirdPage> {
                         Icon(
                           Icons.lightbulb_outline,
                           size: iconSize,
+                          color: Colors.amber,
                         ),
                         Text('Ideas')
                       ]),
@@ -752,14 +755,17 @@ class _MyThirdPageState extends State<MyThirdPage> {
                       Icon(
                         Icons.cake,
                         size: iconSize,
+                        color: Colors.amberAccent,
                       ),
                       Icon(
                         Icons.voice_chat,
                         size: iconSize,
+                        color: Colors.blue,
                       ),
                       Icon(
                         Icons.add_location,
                         size: iconSize,
+                        color: Colors.brown,
                       ),
                     ]),
                   ],
