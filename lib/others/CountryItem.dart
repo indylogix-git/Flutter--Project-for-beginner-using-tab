@@ -144,7 +144,7 @@ class CountryItem extends StatelessWidget {
                               FlatButton(
                                 color: Colors.white,
                                 child: const Text("Edit"),
-                                onPressed: onTapOperation,
+                                onPressed: onTapEdit,
                               ),
                               FlatButton(
                                 color: Colors.white,
