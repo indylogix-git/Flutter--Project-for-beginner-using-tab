@@ -94,10 +94,7 @@ class _State extends State<Login> {
                     child: RaisedButton(
                       textColor: Colors.white,
                       color: Colors.blue,
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontSize: 15)
-                      ),
+                      child: Text('Login', style: TextStyle(fontSize: 15)),
                       onPressed: () {
                         if (nameController.text.length == 0) {
                           Fluttertoast.showToast(

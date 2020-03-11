@@ -1,11 +1,13 @@
 import 'package:firstapp/fragments/first_fragment.dart';
 import 'package:firstapp/fragments/second_fragment.dart';
 import 'package:firstapp/fragments/third_fragment.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class DrawerItem {
   String title;
   IconData icon;
+
   DrawerItem(this.title, this.icon);
 }
 
@@ -24,6 +26,9 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int _selectedDrawerIndex = 0;
+
+  bool checkValue = false;
+  SharedPreferences sharedPreferences;
 
   _getDrawerItemWidget(int pos) {
     switch (pos) {
@@ -64,7 +69,8 @@ class HomePageState extends State<HomePage> {
         // you can instead choose to have a static title
         title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
       ),
-      drawer: new Drawer(        // -> Drawer for start from left side
+      drawer: new Drawer(
+        // -> Drawer for start from left side
 //      drawer: new Container(      // -> Drawer for full screen drawer        // endDrawer: new Drawer  -> Drawer for start from right side
 //      width: MediaQuery.of(context).size.width,
 //      height: MediaQuery.of(context).size.height,
@@ -72,10 +78,12 @@ class HomePageState extends State<HomePage> {
 //        elevation: 20.0,
         child: new Column(
           children: <Widget>[
+//            getStringstringEmail(),
+//            getCredential(),
             new UserAccountsDrawerHeader(
 //                accountName: new Text("John Doe"), accountEmail: null),
               accountName: new Text("Bhanu Prakash Dave"),
-              accountEmail: new Text("bhanudave13@gmail.com"),
+              accountEmail: new Text("bhanu.indylogix@gmail.com"),
               decoration: new BoxDecoration(
                 image: new DecorationImage(
                   image: new ExactAssetImage('assets/images/lake.jpg'),
@@ -94,4 +102,51 @@ class HomePageState extends State<HomePage> {
       body: _getDrawerItemWidget(_selectedDrawerIndex),
     );
   }
+
+  getCredential() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      checkValue = sharedPreferences.getBool("check");
+      if (checkValue != null) {
+        if (checkValue) {
+          new UserAccountsDrawerHeader(
+//                accountName: new Text("John Doe"), accountEmail: null),
+            accountName: new Text("Bhanu Prakash Dave"),
+            accountEmail: new Text(sharedPreferences.getString("email")),
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new ExactAssetImage('assets/images/lake.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://randomuser.me/api/portraits/men/46.jpg")),
+//            new Column(children: drawerOptions)
+          );
+
+//        } else {
+//          username.clear();
+//          password.clear();
+//          sharedPreferences.clear();
+        }
+      } else {
+        checkValue = false;
+      }
+    });
+  }
+}
+
+getStringstringEmail() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return String
+  String stringEmail = prefs.getString('Email');
+  return stringEmail;
+}
+
+getStringstringPassword() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return String
+  String stringPassword = prefs.getString('Password');
+  return stringPassword;
 }

@@ -4,6 +4,7 @@ import 'package:firstapp/pages/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'login.dart';
 
@@ -15,6 +16,10 @@ class Registration extends StatefulWidget {
 class _State extends State<Registration> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  bool checkValue = false;
+
+  SharedPreferences sharedPreferences;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +83,12 @@ class _State extends State<Registration> {
                   textColor: Colors.blue,
 //                  child: Text('Forgot Password'),
                 ),
+                new CheckboxListTile(
+                  value: checkValue,
+                  onChanged: _onChanged,
+                  title: new Text("Remember me"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                ),
 //          Container(                      // Using -> Container/SizedBox/FractionallySizedBox
 //              width: 300, // or whatever width you want,
 //              child: CupertinoButton(
@@ -116,6 +127,7 @@ class _State extends State<Registration> {
                               textColor: Colors.white,
                               fontSize: 16.0);
                         } else {
+//                          addStringToSF(nameController.text, passwordController.text);
                           print(nameController.text);
                           print(passwordController.text);
                           // ignore: unnecessary_statements
@@ -136,7 +148,17 @@ class _State extends State<Registration> {
                         'Sign In',
                         style: TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        sharedPreferences =
+                            await SharedPreferences.getInstance();
+
+                        sharedPreferences.setBool("check", checkValue);
+                        sharedPreferences.setString(
+                            "email", nameController.text);
+                        sharedPreferences.setString(
+                            "password", passwordController.text);
+                        // ignore: deprecated_member_use
+                        sharedPreferences.commit();
                         //signup screen
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (BuildContext context) => Login()));
@@ -148,4 +170,42 @@ class _State extends State<Registration> {
               ],
             )));
   }
+
+  _onChanged(bool value) async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      checkValue = value;
+      sharedPreferences.setBool("check", checkValue);
+      sharedPreferences.setString("email", nameController.text);
+      sharedPreferences.setString("password", passwordController.text);
+      // ignore: deprecated_member_use
+      sharedPreferences.commit();
+      getCredential();
+    });
+  }
+
+  getCredential() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      checkValue = sharedPreferences.getBool("check");
+      if (checkValue != null) {
+        if (checkValue) {
+          nameController.text = sharedPreferences.getString("email");
+          passwordController.text = sharedPreferences.getString("password");
+        } else {
+          nameController.clear();
+          passwordController.clear();
+          sharedPreferences.clear();
+        }
+      } else {
+        checkValue = false;
+      }
+    });
+  }
+}
+
+addStringToSF(String email, String password) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('Email', email);
+  prefs.setString('Password', password);
 }
