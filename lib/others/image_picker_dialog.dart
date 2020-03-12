@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'image_picker_handler.dart';
 
+// ignore: must_be_immutable
 class ImagePickerDialog extends StatelessWidget {
 
   ImagePickerHandler _listener;
