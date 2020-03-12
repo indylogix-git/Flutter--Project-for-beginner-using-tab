@@ -1,7 +1,9 @@
 import 'package:firstapp/fragments/first_fragment.dart';
 import 'package:firstapp/fragments/second_fragment.dart';
 import 'package:firstapp/fragments/third_fragment.dart';
+import 'package:firstapp/others/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 
 class DrawerItem {
@@ -15,7 +17,8 @@ class HomePage extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Home", Icons.widgets),
     new DrawerItem("Login", Icons.remove_red_eye),
-    new DrawerItem("Fragment", Icons.info)
+    new DrawerItem("Fragment", Icons.info),
+    new DrawerItem("Proflie", Icons.face)
   ];
 
   @override
@@ -26,6 +29,15 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int _selectedDrawerIndex = 0;
+
+  Choice _selectedChoice = choices[0]; // The app's "state".
+
+  void _select(Choice choice) {
+    // Causes the app to rebuild with the new _selectedChoice.
+    setState(() {
+      _selectedChoice = choice;
+    });
+  }
 
   bool checkValue = false;
   SharedPreferences sharedPreferences;
@@ -38,6 +50,8 @@ class HomePageState extends State<HomePage> {
         return new SecondFragment();
       case 2:
         return new ThirdFragment();
+      case 3:
+        return new HomeScreen();
 
       default:
         return new Text("Error");
@@ -68,6 +82,68 @@ class HomePageState extends State<HomePage> {
         // here we display the title corresponding to the fragment
         // you can instead choose to have a static title
         title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(choices[0].icon),
+            onPressed: () {
+              _select(choices[0]);
+              Fluttertoast.showToast(
+                  msg: "Car",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIos: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            },
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // do something
+              Fluttertoast.showToast(
+                  msg: "Setting",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIos: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            },
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.add_shopping_cart,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // do something
+              Fluttertoast.showToast(
+                  msg: "Cart",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIos: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            },
+          ),
+          // overflow menu
+          PopupMenuButton<Choice>(
+            onSelected: _select,
+            itemBuilder: (BuildContext context) {
+              return choices.skip(2).map((Choice choice) {
+                return PopupMenuItem<Choice>(
+                  value: choice,
+                  child: Text(choice.title),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
       drawer: new Drawer(
         // -> Drawer for start from left side
@@ -100,6 +176,14 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       body: _getDrawerItemWidget(_selectedDrawerIndex),
+/*      body: Container(
+        child: Column(
+            children: <Widget>[
+       Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ChoiceCard(choice: _selectedChoice),
+      ),
+      ]))*/
     );
   }
 
@@ -135,6 +219,50 @@ class HomePageState extends State<HomePage> {
       }
     });
   }
+}
+
+class Choice {
+  const Choice({this.title, this.icon});
+
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'Car', icon: Icons.directions_car),
+  const Choice(title: 'Bicycle', icon: Icons.directions_bike),
+  const Choice(title: 'Boat', icon: Icons.directions_boat),
+  const Choice(title: 'Bus', icon: Icons.directions_bus),
+  const Choice(title: 'Train', icon: Icons.directions_railway),
+  const Choice(title: 'Walk', icon: Icons.directions_walk),
+];
+
+class ChoiceCard extends StatelessWidget {
+  const ChoiceCard({Key key, this.choice}) : super(key: key);
+
+  final Choice choice;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle textStyle = Theme.of(context).textTheme.display1;
+    return Card(
+      color: Colors.white,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(choice.icon, size: 128.0, color: textStyle.color),
+            Text(choice.title, style: textStyle),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(HomePage());
 }
 
 getStringstringEmail() async {

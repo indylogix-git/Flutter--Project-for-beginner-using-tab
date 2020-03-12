@@ -4,6 +4,7 @@ import 'package:firstapp/others/CountryPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
@@ -21,6 +22,10 @@ class MyThirdPage extends StatefulWidget {
   _MyThirdPageState createState() => _MyThirdPageState();
 }
 
+class MyFourthPage extends StatefulWidget {
+  @override
+  _MyFourthPageState createState() => _MyFourthPageState();
+}
 
 /*Fragment Start*/
 
@@ -40,6 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int _screen = 0;
   int _count = 0;
   List data;
+
+  // Declare this variable
+  int selectedRadio;
+
+  int _groupValue = -1;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -66,6 +76,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     this.getData();
+    selectedRadio = 0;
+  }
+
+  // Changes the selected value on 'onChanged' click on each radio button
+  setSelectedRadio(int val) {
+    setState(() {
+      selectedRadio = val;
+    });
   }
 
   @override
@@ -95,88 +113,156 @@ class _MyHomePageState extends State<MyHomePage> {
 //                    child: new Text('Second screen'),
                                     child: Center(
                                         child: Column(children: <Widget>[
-                                          Center(
-                                            child: RaisedButton(
-                                              child: Text('Go to Second Screen'),
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MySecondPage()),
-                                                );
-                                              },
-                                              textColor: Colors.white,
-                                              color: Colors.lightGreen,
-                                            ),
-                                          ),
-                                          RaisedButton(child: Text('Disabled Button')),
-                                          RaisedButton(
-                                            child: Text('Default Enabled'),
-                                            onPressed: () {
-                                              print('IconButton is pressed');
-                                            },
-                                          ),
-                                          RaisedButton(
-                                            child: Text('Text Color Changed'),
-                                            textColor: Colors.red,
-                                            onPressed: () {},
-                                          ),
-                                          RaisedButton(
-                                            child: Text('Color Changed'),
-                                            color: Colors.green,
-                                            onPressed: () {},
-                                          ),
-                                          RaisedButton(
-                                            child: Text('Button with Padding'),
-                                            padding: EdgeInsets.all(20),
-                                            onPressed: () {},
-                                          ),
-                                          RaisedButton(
-                                            child: Text('More Rounded Corners'),
-                                            color: Colors.purpleAccent,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(16.0))),
-                                            onPressed: () {},
-                                          ),
-                                          RaisedButton(
-                                            child: Text('Elevation increased'),
-                                            elevation: 5,
-                                            onPressed: () {},
-                                          ),
-                                          RaisedButton(
-                                            child: Text('Splash Color as red'),
-                                            splashColor: Colors.red,
-                                            onPressed: () {},
-                                          ),
-                                          RaisedButton(
-                                            child: Text('Zero Elevation'),
-                                            elevation: 0,
-                                            onPressed: () {
-                                              _showScaffold(
-                                                  "This is a SnackBar called from another place.");
-                                            },
-                                          ),
-                                          RaisedButton(
-                                            onPressed: () {},
-                                            textColor: Colors.white,
-                                            padding: const EdgeInsets.all(0.0),
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: <Color>[
-                                                    Color(0xFF0D47A1),
-                                                    Color(0xFF1976D2),
-                                                    Color(0xFF42A5F5),
-                                                  ],
-                                                ),
-                                              ),
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: const Text('Gradient Color'),
-                                            ),
-                                          ),
-                                        ])))
+                                  Center(
+                                    child: RaisedButton(
+                                      child: Text('Go to Second Screen'),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MySecondPage()),
+                                        );
+                                      },
+                                      textColor: Colors.white,
+                                      color: Colors.lightGreen,
+                                    ),
+                                  ),
+                                  RadioListTile(
+                                    value: 1,
+                                    groupValue: selectedRadio,
+                                    title: Text("Radio 1"),
+                                    subtitle: Text("Radio 1 Subtitle"),
+                                    activeColor: Colors.green,
+                                    onChanged: (val) {
+                                      print("Radio $val");
+                                      setSelectedRadio(val);
+                                    },
+                                    secondary: OutlineButton(
+                                      child: Text("Say Hi"),
+                                      onPressed: () {
+                                        print("Say Hello");
+                                      },
+                                    ),
+                                    selected: false,
+                                  ),
+                                  RadioListTile(
+                                    value: 2,
+                                    groupValue: selectedRadio,
+                                    title: Text("Radio 2"),
+                                    subtitle: Text("Radio 2 Subtitle"),
+                                    activeColor: Colors.green,
+                                    onChanged: (val) {
+                                      print("Radio $val");
+                                      setSelectedRadio(val);
+                                    },
+                                    secondary: OutlineButton(
+                                      child: Text("Say Hi"),
+                                      onPressed: () {
+                                        print("Say Hello");
+                                      },
+                                    ),
+                                    selected: false,
+                                  ),
+                                  Radio(
+                                    value: 3,
+                                    groupValue: selectedRadio,
+                                    activeColor: Colors.blue,
+                                    onChanged: (val) {
+                                      print("Radio $val");
+                                      setSelectedRadio(val);
+                                    },
+                                  ),
+                                  Radio(
+                                    value: 4,
+                                    groupValue: selectedRadio,
+                                    activeColor: Colors.blue,
+                                    onChanged: (val) {
+                                      print("Radio $val");
+                                      setSelectedRadio(val);
+                                    },
+                                  ),
+                                  _myRadioButton(
+                                    title: "Checkbox 0",
+                                    value: 0,
+                                    onChanged: (newValue) =>
+                                        setState(() => _groupValue = newValue),
+                                  ),
+                                  _myRadioButton(
+                                    title: "Checkbox 1",
+                                    value: 1,
+                                    onChanged: (newValue) =>
+                                        setState(() => _groupValue = newValue),
+                                  ),
+                                  RaisedButton(child: Text('Disabled Button')),
+                                  RaisedButton(
+                                    child: Text('Default Enabled'),
+                                    onPressed: () {
+                                      print('IconButton is pressed');
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    child: Text('Text Color Changed'),
+                                    textColor: Colors.red,
+                                    onPressed: () {},
+                                  ),
+                                  RaisedButton(
+                                    child: Text('Color Changed'),
+                                    color: Colors.green,
+                                    onPressed: () {},
+                                  ),
+                                  RaisedButton(
+                                    child: Text('Button with Padding'),
+                                    padding: EdgeInsets.all(20),
+                                    onPressed: () {},
+                                  ),
+                                  RaisedButton(
+                                    child: Text('More Rounded Corners'),
+                                    color: Colors.purpleAccent,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(16.0))),
+                                    onPressed: () {},
+                                  ),
+                                  RaisedButton(
+                                    child: Text('Elevation increased'),
+                                    elevation: 5,
+                                    onPressed: () {
+                                      _launchURL();
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    child: Text('Splash Color as red'),
+                                    splashColor: Colors.red,
+                                    onPressed: () {},
+                                  ),
+                                  RaisedButton(
+                                    child: Text('Zero Elevation'),
+                                    elevation: 0,
+                                    onPressed: () {
+                                      _showScaffold(
+                                          "This is a SnackBar called from another place.");
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    onPressed: () {},
+                                    textColor: Colors.white,
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: <Color>[
+                                            Color(0xFF0D47A1),
+                                            Color(0xFF1976D2),
+                                            Color(0xFF42A5F5),
+                                          ],
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: const Text('Gradient Color'),
+                                    ),
+                                  ),
+                                ])))
                               ]))));
                 case 2:
 //                  return new Center(
@@ -199,71 +285,71 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             elevation: 5,
                             margin:
-                            EdgeInsets.only(left: 10, right: 10, top: 10),
+                                EdgeInsets.only(left: 10, right: 10, top: 10),
                             child: Container(
                                 child: Column(children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
+                              Row(
+                                mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
+                                children: <Widget>[
+                                  Column(
 //                                    mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
+                                    crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                12.0, 12.0, 0, 6.0),
-                                            child: Text(
-                                              data[index]["title"],
-                                              maxLines: 2,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            12.0, 12.0, 0, 6.0),
+                                        child: Text(
+                                          data[index]["title"],
+                                          maxLines: 2,
 //                                          sendersList[position],
-                                              style: TextStyle(
-                                                  fontSize: 15.0,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                12.0, 12.0, 0, 6.0),
-                                            child: Text(
-                                              data[index]["body"],
-//                                          subjectList[position],
-                                              style: TextStyle(fontSize: 11.0),
-                                              maxLines: 5,
-                                            ),
-                                          ),
-                                        ],
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-//                                      mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Text(
-                                              "5m",
-                                              style: TextStyle(color: Colors.grey),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Icon(
-                                                Icons.star_border,
-                                                size: 35.0,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ],
+                                        padding: const EdgeInsets.fromLTRB(
+                                            12.0, 12.0, 0, 6.0),
+                                        child: Text(
+                                          data[index]["body"],
+//                                          subjectList[position],
+                                          style: TextStyle(fontSize: 11.0),
+                                          maxLines: 5,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Divider(
-                                    height: 2.0,
-                                    color: Colors.grey,
-                                  )
-                                ])));
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+//                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text(
+                                          "5m",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Icon(
+                                            Icons.star_border,
+                                            size: 35.0,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                height: 2.0,
+                                color: Colors.grey,
+                              )
+                            ])));
 
 //                            semanticContainer: true,
 //                            clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -372,6 +458,24 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ));
   }
+
+  Widget _myRadioButton({String title, int value, Function onChanged}) {
+    return RadioListTile(
+      value: value,
+      groupValue: _groupValue,
+      onChanged: onChanged,
+      title: Text(title),
+    );
+  }
+
+  _launchURL() async {
+    const url = 'https://flutter.dev';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
 
 class _MySecondPageState extends State<MySecondPage> {
@@ -386,101 +490,101 @@ class _MySecondPageState extends State<MySecondPage> {
         body: Center(
             child: new SingleChildScrollView(
                 child: new ConstrainedBox(
-                  constraints: new BoxConstraints(),
-                  child: Column(children: <Widget>[
-                    Center(
-                      child: RaisedButton(
-                        child: Text('Go back to Home Screen'),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        textColor: Colors.white,
-                        color: Colors.lightGreen,
-                      ),
-                    ),
-                    Center(
-                      child: RaisedButton(
-                        child: Text('Go to Third Screen'),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MyThirdPage()),
-                          );
-                        },
-                        textColor: Colors.white,
-                        color: Colors.lightGreen,
-                      ),
-                    ),
-                    Center(
-                        child: Icon(
-                          Icons.directions_transit,
-                          color: Colors.red,
-                        )),
-                    Center(
-                        child: Icon(
-                          Icons.directions_transit,
-                          color: Colors.green,
-                          size: 70,
-                        )),
-                    Text('Trains',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Futura',
-                          color: Colors.deepOrange,
-                        )),
-                    Center(
-                        child: Text(
-                          'Students',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        )),
-                    DataTable(
-                      columns: [
-                        DataColumn(label: Text('RollNo')),
-                        DataColumn(label: Text('Name')),
-                        DataColumn(label: Text('Class')),
-                      ],
-                      rows: [
-                        DataRow(cells: [
-                          DataCell(Text('1')),
-                          DataCell(Text('Arya')),
-                          DataCell(Text('6')),
-                        ]),
-                        DataRow(cells: [
-                          DataCell(Text('12')),
-                          DataCell(Text('John')),
-                          DataCell(Text('9')),
-                        ]),
-                        DataRow(cells: [
-                          DataCell(Text('42')),
-                          DataCell(Text('Tony')),
-                          DataCell(Text('8')),
-                        ]),
-                      ],
-                    ),
-                    Text(
-                      'Raised Buttons with Different Properties',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.all(20),
-                        child: ToggleButtons(
-                          children: <Widget>[
-                            Icon(Icons.add_comment),
-                            Icon(Icons.airline_seat_individual_suite),
-                            Icon(Icons.add_location),
-                          ],
-                          isSelected: _selections,
-                          onPressed: (int index) {
-                            setState(() {
-                              _selections[index] = !_selections[index];
-                            });
-                          },
-                        )),
-                  ]),
-                ))));
+          constraints: new BoxConstraints(),
+          child: Column(children: <Widget>[
+            Center(
+              child: RaisedButton(
+                child: Text('Go back to Home Screen'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                textColor: Colors.white,
+                color: Colors.lightGreen,
+              ),
+            ),
+            Center(
+              child: RaisedButton(
+                child: Text('Go to Third Screen'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyThirdPage()),
+                  );
+                },
+                textColor: Colors.white,
+                color: Colors.lightGreen,
+              ),
+            ),
+            Center(
+                child: Icon(
+              Icons.directions_transit,
+              color: Colors.red,
+            )),
+            Center(
+                child: Icon(
+              Icons.directions_transit,
+              color: Colors.green,
+              size: 70,
+            )),
+            Text('Trains',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Futura',
+                  color: Colors.deepOrange,
+                )),
+            Center(
+                child: Text(
+              'Students',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )),
+            DataTable(
+              columns: [
+                DataColumn(label: Text('RollNo')),
+                DataColumn(label: Text('Name')),
+                DataColumn(label: Text('Class')),
+              ],
+              rows: [
+                DataRow(cells: [
+                  DataCell(Text('1')),
+                  DataCell(Text('Arya')),
+                  DataCell(Text('6')),
+                ]),
+                DataRow(cells: [
+                  DataCell(Text('12')),
+                  DataCell(Text('John')),
+                  DataCell(Text('9')),
+                ]),
+                DataRow(cells: [
+                  DataCell(Text('42')),
+                  DataCell(Text('Tony')),
+                  DataCell(Text('8')),
+                ]),
+              ],
+            ),
+            Text(
+              'Raised Buttons with Different Properties',
+              style: TextStyle(fontSize: 16),
+            ),
+            Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(20),
+                child: ToggleButtons(
+                  children: <Widget>[
+                    Icon(Icons.add_comment),
+                    Icon(Icons.airline_seat_individual_suite),
+                    Icon(Icons.add_location),
+                  ],
+                  isSelected: _selections,
+                  onPressed: (int index) {
+                    setState(() {
+                      _selections[index] = !_selections[index];
+                    });
+                  },
+                )),
+          ]),
+        ))));
   }
 }
 
@@ -509,144 +613,236 @@ class _MyThirdPageState extends State<MyThirdPage> {
         body: Center(
           child: new SingleChildScrollView(
               child: new ConstrainedBox(
-                constraints: new BoxConstraints(),
-                child: Column(children: <Widget>[
-                  Center(
-                    child: RaisedButton(
-                      child: Text('Go back to Second Screen'),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+            constraints: new BoxConstraints(),
+            child: Column(children: <Widget>[
+              Center(
+                child: RaisedButton(
+                  child: Text('Go back to Second Screen'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  textColor: Colors.white,
+                  color: Colors.lightGreen,
+                ),
+              ),
+              Center(
+                child: RaisedButton(
+                  child: Text('Go Checkbox'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyFourthPage()),
+                    );
+                  },
+                  textColor: Colors.white,
+                  color: Colors.lightGreen,
+                ),
+              ),
+              MaterialButton(
+                child: Text(
+                  'Show details',
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
+                onPressed: () => setState(() {
+                  opacityLevel = 1.0;
+                }),
+              ),
+              AnimatedOpacity(
+                duration: Duration(seconds: 3),
+                opacity: opacityLevel,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Name: Bhanu Prakash Dave',
+                      style: TextStyle(fontSize: 18),
                     ),
-                  ),
-                  MaterialButton(
-                    child: Text(
-                      'Show details',
-                      style: TextStyle(color: Colors.blueAccent),
+                    Text(
+                      'Age: 35',
+                      style: TextStyle(fontSize: 18),
                     ),
-                    onPressed: () => setState(() {
-                      opacityLevel = 1.0;
-                    }),
-                  ),
-                  AnimatedOpacity(
-                    duration: Duration(seconds: 3),
-                    opacity: opacityLevel,
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'Name: Bhanu Prakash Dave',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          'Age: 35',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          'Occupation: Android Developer',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ],
+                    Text(
+                      'Occupation: Android Developer',
+                      style: TextStyle(fontSize: 18),
                     ),
-                  ),
-                  Image.network('https://urlzs.com/RsqCz'),
-                  /*Download Image From URL*/
-                  Container(
-                      margin: EdgeInsets.all(20),
-                      child: Text(
-                        'Hello! Welcome to TutorialKart. We shall zoom this text when you long press on it.',
-                        style: TextStyle(fontSize: _fontSize),
-                        textAlign: TextAlign.center,
-                      )),
-                  RaisedButton(
-                    onPressed: () => {increaseFontSize()},
-                    child: Text('Bigger Font'),
-                  ),
-                  Switch(
-                    value: isSwitched,
-                    onChanged: (value) {
+                  ],
+                ),
+              ),
+              Image.network('https://urlzs.com/RsqCz'),
+              /*Download Image From URL*/
+              Container(
+                  margin: EdgeInsets.all(20),
+                  child: Text(
+                    'Hello! Welcome to TutorialKart. We shall zoom this text when you long press on it.',
+                    style: TextStyle(fontSize: _fontSize),
+                    textAlign: TextAlign.center,
+                  )),
+              RaisedButton(
+                onPressed: () => {increaseFontSize()},
+                child: Text('Bigger Font'),
+              ),
+              Switch(
+                value: isSwitched,
+                onChanged: (value) {
+                  setState(() {
+                    isSwitched = value;
+                    print(isSwitched);
+                  });
+                },
+                activeTrackColor: Colors.lightGreenAccent,
+                activeColor: Colors.green,
+              ),
+              Container(
+                  margin: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Full Name',
+                    ),
+                    onChanged: (text) {
                       setState(() {
-                        isSwitched = value;
-                        print(isSwitched);
+                        fullName = text;
+                        //you can access nameController in its scope to get
+                        // the value of text entered as shown below
+                        //fullName = nameController.text;
                       });
                     },
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: Colors.green,
-                  ),
-                  Container(
-                      margin: EdgeInsets.all(20),
-                      child: TextField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Full Name',
-                        ),
-                        onChanged: (text) {
-                          setState(() {
-                            fullName = text;
-                            //you can access nameController in its scope to get
-                            // the value of text entered as shown below
-                            //fullName = nameController.text;
-                          });
-                        },
-                      )),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: Text(fullName),
-                  ),
-                  Container(
-                    margin:
+                  )),
+              Container(
+                margin: EdgeInsets.all(20),
+                child: Text(fullName),
+              ),
+              Container(
+                margin:
                     EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 10),
-                    child: Table(
-                      border: TableBorder.all(),
-                      children: [
-                        TableRow(children: [
-                          Column(children: [
-                            Icon(
-                              Icons.account_box,
-                              size: iconSize,
-                              color: Colors.deepPurple,
-                            ),
-                            Text('My Account')
-                          ]),
-                          Column(children: [
-                            Icon(
-                              Icons.settings,
-                              size: iconSize,
-                              color: Colors.purple,
-                            ),
-                            Text('Settings')
-                          ]),
-                          Column(children: [
-                            Icon(
-                              Icons.lightbulb_outline,
-                              size: iconSize,
-                              color: Colors.amber,
-                            ),
-                            Text('Ideas')
-                          ]),
-                        ]),
-                        TableRow(children: [
-                          Icon(
-                            Icons.cake,
-                            size: iconSize,
-                            color: Colors.amberAccent,
-                          ),
-                          Icon(
-                            Icons.voice_chat,
-                            size: iconSize,
-                            color: Colors.blue,
-                          ),
-                          Icon(
-                            Icons.add_location,
-                            size: iconSize,
-                            color: Colors.brown,
-                          ),
-                        ]),
-                      ],
-                    ),
-                  ),
-                ]),
-              )),
+                child: Table(
+                  border: TableBorder.all(),
+                  children: [
+                    TableRow(children: [
+                      Column(children: [
+                        Icon(
+                          Icons.account_box,
+                          size: iconSize,
+                          color: Colors.deepPurple,
+                        ),
+                        Text('My Account')
+                      ]),
+                      Column(children: [
+                        Icon(
+                          Icons.settings,
+                          size: iconSize,
+                          color: Colors.purple,
+                        ),
+                        Text('Settings')
+                      ]),
+                      Column(children: [
+                        Icon(
+                          Icons.lightbulb_outline,
+                          size: iconSize,
+                          color: Colors.amber,
+                        ),
+                        Text('Ideas')
+                      ]),
+                    ]),
+                    TableRow(children: [
+                      Icon(
+                        Icons.cake,
+                        size: iconSize,
+                        color: Colors.amberAccent,
+                      ),
+                      Icon(
+                        Icons.voice_chat,
+                        size: iconSize,
+                        color: Colors.blue,
+                      ),
+                      Icon(
+                        Icons.add_location,
+                        size: iconSize,
+                        color: Colors.brown,
+                      ),
+                    ]),
+                  ],
+                ),
+              ),
+            ]),
+          )),
         ));
+  }
+}
+
+class _MyFourthPageState extends State {
+  Map<String, bool> values = {
+    'Apple': false,
+    'Banana': false,
+    'Cherry': false,
+    'Mango': false,
+    'Orange': false,
+  };
+
+  var tmpArray = [];
+
+  getCheckboxItems() {
+    values.forEach((key, value) {
+      if (value == true) {
+        tmpArray.add(key);
+      }
+    });
+
+    // Printing all selected items on Terminal screen.
+    print(tmpArray);
+    // Here you will get all your selected Checkbox items.
+
+    // Clear array after use.
+    tmpArray.clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Fourth Screen'),
+        ),
+        body: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Center(
+                child: RaisedButton(
+                  child: Text('Go back to Third Screen'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  textColor: Colors.white,
+                  color: Colors.lightGreen,
+                ),
+              ),
+              RaisedButton(
+                child: Text(
+                  " Get Selected Checkbox Items ",
+                  style: TextStyle(fontSize: 18),
+                ),
+                onPressed: getCheckboxItems,
+                color: Colors.deepOrange,
+                textColor: Colors.white,
+                splashColor: Colors.grey,
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              ),
+              Expanded(
+                child: ListView(
+                  children: values.keys.map((String key) {
+                    return new CheckboxListTile(
+                      title: new Text(key),
+                      value: values[key],
+                      activeColor: Colors.pink,
+                      checkColor: Colors.white,
+                      onChanged: (bool value) {
+                        setState(() {
+                          values[key] = value;
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+            ]));
   }
 }
