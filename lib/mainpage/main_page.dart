@@ -27,7 +27,6 @@ class MyFourthPage extends StatefulWidget {
 }
 
 /*Fragment Start*/
-
 const List<String> tabNames = const <String>[
   'foo',
   'bar',
