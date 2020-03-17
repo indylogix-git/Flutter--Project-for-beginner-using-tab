@@ -1,24 +1,30 @@
 import 'dart:async';
 
 import 'package:firstapp/login.dart';
-import 'package:firstapp/pages/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   void initState() {
     super.initState();
+    CallMethod();
+  }
+
+  // ignore: non_constant_identifier_names
+  void CallMethod() {
     Timer(
         Duration(seconds: 3),
             () => Navigator.of(context).pushReplacement(MaterialPageRoute(
 //            builder: (BuildContext context) => MyHomePage()
-                builder: (BuildContext context) => Login())));
+            builder: (BuildContext context) => Login())));
   }
 
   @override
@@ -39,4 +45,5 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
 }

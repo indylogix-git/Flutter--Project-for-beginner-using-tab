@@ -7,7 +7,7 @@ class ThirdFragment extends StatelessWidget {
     // TODO: implement build
     return new Center(
 //      child: new Text("Hello Fragment 3"),
-        child: new MyHomePage(title: 'ListView with Search'),
+        child: MyHomePage(title: 'ListView with Search'),
     );
   }
 

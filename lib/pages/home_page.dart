@@ -1,3 +1,4 @@
+import 'package:firstapp/fragments/ProfilePageFragment.dart';
 import 'package:firstapp/fragments/first_fragment.dart';
 import 'package:firstapp/fragments/second_fragment.dart';
 import 'package:firstapp/fragments/third_fragment.dart';
@@ -16,7 +17,8 @@ class HomePage extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Home", Icons.widgets),
     new DrawerItem("Login", Icons.remove_red_eye),
-    new DrawerItem("Fragment", Icons.info)
+    new DrawerItem("Fragment", Icons.info),
+    new DrawerItem("Profile", Icons.face)
   ];
 
   @override
@@ -48,6 +50,8 @@ class HomePageState extends State<HomePage> {
         return new SecondFragment();
       case 2:
         return new ThirdFragment();
+      case 3:
+        return new ProfilePageFragment();
 
       default:
         return new Text("Error");
