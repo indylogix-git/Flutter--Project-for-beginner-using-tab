@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firstapp/pages/home_page.dart';
-import 'package:firstapp/registration.dart';
+import 'package:firstapp/mainpage/registration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

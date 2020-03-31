@@ -1,6 +1,6 @@
-import 'package:firstapp/mainpage/main.dart';
+import 'package:firstapp/main.dart';
 import 'package:firstapp/others/panel.dart';
-import 'package:firstapp/registration.dart';
+import 'package:firstapp/mainpage/registration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
